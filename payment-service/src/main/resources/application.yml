@@ -1,0 +1,47 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: orderEventProcessor;paymentEventSubscriber
+      bindings:
+        orderEventProcessor-in-0:
+          destination: orders
+        orderEventProcessor-out-0:
+          destination: payments
+        paymentEventSubscriber-in-0:
+          destination: payments
+        paymentEventSubscriber-out-0:
+          destination: transactions
+      default:
+        contentType: application/json
+
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:postgresql://localhost:5434/payment_db
+    username: payment_user
+    password: payment_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+
