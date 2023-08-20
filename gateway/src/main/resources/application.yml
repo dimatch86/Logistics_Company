@@ -7,7 +7,7 @@ spring:
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/company/api/order/**
+            - Path=/company/api/order/**, /assets/**, /favicon.ico
           filters:
             - RewritePath=/company(?<segment>/?.*), $\{segment}
         - id: payment-service

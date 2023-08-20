@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @PostMapping("/api/order")
-    public ResponseEntity<?> addOrder(@RequestBody OrderDto input) {
+    public ResponseEntity<?> addOrder(OrderDto input) {
         Optional<Order> result = orderService.addOrder(input);
         return result.isPresent() ? new ResponseEntity<>(HttpStatus.CREATED) : new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
     }

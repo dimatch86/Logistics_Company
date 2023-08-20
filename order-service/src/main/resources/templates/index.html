@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OrderLIST</title>
+    <script src="/assets/js/jquery-3.4.0.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="/assets/css/styles.css">-->
+    <link href="/assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="order-form">
+    <form>
+        <h2>Добавление заказа</h2>
+        <label>Содержание заказа:</label>
+        <input type="text" name="description" value="" required>
+        <label>Адрес:</label>
+        <input type="text" name="departureAddress" value="" required>
+        <label>Адрес2:</label>
+        <input type="text" name="destinationAddress" value="" required>
+        <label>Цена:</label>
+        <input type="number" name="cost" value="" required>
+        <label>Юзер:</label>
+        <input type="number" name="userId" value="" required min="1">
+        <hr>
+        <button id="save-order">Сохранить</button>
+    </form>
+</div>
+<div id="del-order-form">
+    <form>
+        <h2>Удаление заказов</h2>
+        <label>ID заказа:</label>
+        <input type="text" id="id" value="">
+        <hr>
+        <button id="delete-order">Удалить</button>
+    </form>
+</div>
+<h1>Список заказов (<span th:text="${ordersCount}")>0</span>)</h1>
+<button id="show-add-order-form">Добавить заказ</button>
+<button id ="show-delete-order-form">Удалить заказ</button>
+<button id ="deleteAll">Удалить все заказы</button>
+<br><br>
+<div id="order-list">
+    <div th:each="order : ${orders}">
+        <a href="#" class="order-link" th:attr="data-id=${order.id}" th:text="${order.id + '.' + order.description + '===' + order.getStatus()}"></a>
+    </div>
+
+</div>
+</body>
+</html>
